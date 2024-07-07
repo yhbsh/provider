@@ -123,12 +123,11 @@ class MultiProvider extends Nested {
   /// For an explanation on the `child` parameter that `builder` receives,
   /// see the "Performance optimizations" section of [AnimatedBuilder].
   MultiProvider({
-    Key? key,
+    super.key,
     required List<SingleChildWidget> providers,
     Widget? child,
     TransitionBuilder? builder,
   }) : super(
-          key: key,
           children: providers,
           child: builder != null
               ? Builder(
@@ -206,20 +205,14 @@ class Provider<T> extends InheritedProvider<T> {
   /// This callback which will be called when [Provider] is unmounted from the
   /// widget tree.
   Provider({
-    Key? key,
-    required Create<T> create,
-    Dispose<T>? dispose,
-    bool? lazy,
-    TransitionBuilder? builder,
-    Widget? child,
+    super.key,
+    required Create<T> super.create,
+    super.dispose,
+    super.lazy,
+    super.builder,
+    super.child,
   }) : super(
-          key: key,
-          lazy: lazy,
-          builder: builder,
-          create: create,
-          dispose: dispose,
           debugCheckInvalidValueType: kReleaseMode ? null : (T value) => Provider.debugCheckInvalidValueType?.call<T>(value),
-          child: child,
         );
 
   /// Expose an existing value without disposing it.
@@ -232,22 +225,16 @@ class Provider<T> extends InheritedProvider<T> {
   /// See [InheritedWidget.updateShouldNotify] for more information.
   /// {@endtemplate}
   Provider.value({
-    Key? key,
-    required T value,
-    UpdateShouldNotify<T>? updateShouldNotify,
-    TransitionBuilder? builder,
-    Widget? child,
+    super.key,
+    required super.value,
+    super.updateShouldNotify,
+    super.builder,
+    super.child,
   })  : assert(() {
           Provider.debugCheckInvalidValueType?.call<T>(value);
           return true;
         }()),
-        super.value(
-          key: key,
-          builder: builder,
-          value: value,
-          updateShouldNotify: updateShouldNotify,
-          child: child,
-        );
+        super.value();
 
   /// Obtains the nearest [Provider<T>] up its widget tree and returns its
   /// value.

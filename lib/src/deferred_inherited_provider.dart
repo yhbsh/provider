@@ -33,19 +33,15 @@ class DeferredInheritedProvider<T, R> extends InheritedProvider<R> {
   /// The object create will be listened using `startListening`, and its content
   /// will be exposed to `child` and its descendants.
   DeferredInheritedProvider({
-    Key? key,
+    super.key,
     required Create<T> create,
     Dispose<T>? dispose,
     required DeferredStartListening<T, R> startListening,
     UpdateShouldNotify<R>? updateShouldNotify,
-    bool? lazy,
-    TransitionBuilder? builder,
-    Widget? child,
+    super.lazy,
+    super.builder,
+    super.child,
   }) : super._constructor(
-          key: key,
-          child: child,
-          lazy: lazy,
-          builder: builder,
           delegate: _CreateDeferredInheritedProvider(
             create: create,
             dispose: dispose,
@@ -56,23 +52,19 @@ class DeferredInheritedProvider<T, R> extends InheritedProvider<R> {
 
   /// Listens to `value` and expose its content to `child` and its descendants.
   DeferredInheritedProvider.value({
-    Key? key,
+    super.key,
     required T value,
     required DeferredStartListening<T, R> startListening,
     UpdateShouldNotify<R>? updateShouldNotify,
-    bool? lazy,
-    TransitionBuilder? builder,
-    Widget? child,
+    super.lazy,
+    super.builder,
+    super.child,
   }) : super._constructor(
-          key: key,
-          lazy: lazy,
-          builder: builder,
           delegate: _ValueDeferredInheritedProvider<T, R>(
             value,
             updateShouldNotify,
             startListening,
           ),
-          child: child,
         );
 }
 
@@ -179,12 +171,12 @@ class _CreateDeferredInheritedProviderElement<T, R> extends _DeferredDelegateSta
   T get controller {
     if (!_didBuild) {
       assert(debugSetInheritedLock(true));
-      bool? _debugPreviousIsInInheritedProviderCreate;
-      bool? _debugPreviousIsInInheritedProviderUpdate;
+      bool? debugPreviousIsInInheritedProviderCreate;
+      bool? debugPreviousIsInInheritedProviderUpdate;
 
       assert(() {
-        _debugPreviousIsInInheritedProviderCreate = debugIsInInheritedProviderCreate;
-        _debugPreviousIsInInheritedProviderUpdate = debugIsInInheritedProviderUpdate;
+        debugPreviousIsInInheritedProviderCreate = debugIsInInheritedProviderCreate;
+        debugPreviousIsInInheritedProviderUpdate = debugIsInInheritedProviderUpdate;
         return true;
       }());
 
@@ -197,8 +189,8 @@ class _CreateDeferredInheritedProviderElement<T, R> extends _DeferredDelegateSta
         _controller = delegate.create(element!);
       } finally {
         assert(() {
-          debugIsInInheritedProviderCreate = _debugPreviousIsInInheritedProviderCreate!;
-          debugIsInInheritedProviderUpdate = _debugPreviousIsInInheritedProviderUpdate!;
+          debugIsInInheritedProviderCreate = debugPreviousIsInInheritedProviderCreate!;
+          debugIsInInheritedProviderUpdate = debugPreviousIsInInheritedProviderUpdate!;
           return true;
         }());
       }

@@ -31,14 +31,13 @@ class ValueListenableProvider<T> extends SingleChildStatelessWidget {
   /// });
   /// ```
   /// {@endtemplate}
-  ValueListenableProvider.value({
-    Key? key,
+  const ValueListenableProvider.value({
+    super.key,
     required ValueListenable<T> value,
     UpdateShouldNotify<T>? updateShouldNotify,
-    Widget? child,
+    super.child,
   })  : _valueListenable = value,
-        _updateShouldNotify = updateShouldNotify,
-        super(key: key, child: child);
+        _updateShouldNotify = updateShouldNotify;
 
   final ValueListenable<T> _valueListenable;
   final UpdateShouldNotify<T>? _updateShouldNotify;
