@@ -218,10 +218,7 @@ class Provider<T> extends InheritedProvider<T> {
           builder: builder,
           create: create,
           dispose: dispose,
-          debugCheckInvalidValueType: kReleaseMode
-              ? null
-              : (T value) =>
-                  Provider.debugCheckInvalidValueType?.call<T>(value),
+          debugCheckInvalidValueType: kReleaseMode ? null : (T value) => Provider.debugCheckInvalidValueType?.call<T>(value),
           child: child,
         );
 
@@ -271,9 +268,7 @@ class Provider<T> extends InheritedProvider<T> {
   /// ```
   static T of<T>(BuildContext context, {bool listen = true}) {
     assert(
-      context.owner!.debugBuilding ||
-          listen == false ||
-          debugIsInInheritedProviderUpdate,
+      context.owner!.debugBuilding || listen == false || debugIsInInheritedProviderUpdate,
       '''
 Tried to listen to a value exposed with provider, from outside of the widget tree.
 
@@ -336,8 +331,7 @@ If you want to expose a variable that can be anything, consider changing
 `dynamic` to `Object` instead.
 ''',
     );
-    final inheritedElement = context.getElementForInheritedWidgetOfExactType<
-        _InheritedProviderScope<T?>>() as _InheritedProviderScopeElement<T?>?;
+    final inheritedElement = context.getElementForInheritedWidgetOfExactType<_InheritedProviderScope<T?>>() as _InheritedProviderScopeElement<T?>?;
 
     if (inheritedElement == null && null is! T) {
       throw ProviderNotFoundException(T, context.widget.runtimeType);

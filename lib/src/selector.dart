@@ -74,11 +74,7 @@ class _Selector0State<T> extends SingleChildState<Selector0<T>> {
   Widget buildWithChild(BuildContext context, Widget? child) {
     final selected = widget.selector(context);
 
-    final shouldInvalidateCache = oldWidget != widget ||
-        (widget._shouldRebuild != null &&
-            widget._shouldRebuild!(value as T, selected)) ||
-        (widget._shouldRebuild == null &&
-            !const DeepCollectionEquality().equals(value, selected));
+    final shouldInvalidateCache = oldWidget != widget || (widget._shouldRebuild != null && widget._shouldRebuild!(value as T, selected)) || (widget._shouldRebuild == null && !const DeepCollectionEquality().equals(value, selected));
     if (shouldInvalidateCache) {
       value = selected;
       oldWidget = widget;

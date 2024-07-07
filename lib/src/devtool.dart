@@ -75,9 +75,7 @@ class ProviderNode {
 class ProviderBinding {
   ProviderBinding._();
 
-  static final debugInstance = kDebugMode
-      ? ProviderBinding._()
-      : throw UnsupportedError('Cannot use ProviderBinding in release mode');
+  static final debugInstance = kDebugMode ? ProviderBinding._() : throw UnsupportedError('Cannot use ProviderBinding in release mode');
 
   Map<String, ProviderNode> _providerDetails = {};
   Map<String, ProviderNode> get providerDetails => _providerDetails;

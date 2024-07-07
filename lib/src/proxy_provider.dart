@@ -87,10 +87,7 @@ class ProxyProvider0<R> extends InheritedProvider<R> {
           update: update,
           dispose: dispose,
           updateShouldNotify: updateShouldNotify,
-          debugCheckInvalidValueType: kReleaseMode
-              ? null
-              : (R value) =>
-                  Provider.debugCheckInvalidValueType?.call<R>(value),
+          debugCheckInvalidValueType: kReleaseMode ? null : (R value) => Provider.debugCheckInvalidValueType?.call<R>(value),
           child: child,
         );
 }
