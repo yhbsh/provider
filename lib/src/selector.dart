@@ -61,7 +61,7 @@ class Selector0<T> extends SingleChildStatefulWidget {
   final ShouldRebuild<T>? _shouldRebuild;
 
   @override
-  _Selector0State<T> createState() => _Selector0State<T>();
+  SingleChildState<Selector0<T>> createState() => _Selector0State<T>();
 }
 
 class _Selector0State<T> extends SingleChildState<Selector0<T>> {
